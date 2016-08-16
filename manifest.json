@@ -1,0 +1,7 @@
+{
+  "name": "Face Detection Demo",
+  "short_name": "Face Detection Demo",
+  "description": "Face Detection web interface (using face-detection-demo backend)",
+  "start_url": "/",
+  "display": "standalone"
+}
