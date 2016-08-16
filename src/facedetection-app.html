@@ -70,6 +70,45 @@
         },
       },
 
+      ready: function() {
+        // connect websocket and different handlers
+        var websocket = new ReconnectingWebSocket('ws://' + window.location.hostname + ':' + window.location.port + '/api');
+        websocket.onopen = this._connected.bind(this);
+        websocket.onclose = this._disconnected.bind(this);
+        websocket.onerror = this._connectionerror.bind(this);
+        websocket.onmessage = this._onmessage.bind(this);
+
+        this.websocket = websocket; // for sending requests
+      },
+
+      _connected: function() {
+        console.log('websocket connected');
+        this.connected = true;
+      },
+
+      _disconnected: function() {
+        console.log('websocket disconnected');
+        this.connected = false;
+      },
+
+      _connectionerror: function(e) {
+          console.log('Error in websocket: ' + e.data);
+      },
+
+      _onmessage: function(e) {
+        console.log('Message received: ' + e.data);
+        var message = JSON.parse(e.data);
+        switch(message.type) {
+          case 'init':
+            var newstats = [];
+            message.allstats.forEach(function(stat) {
+              newstats.push([(new Date(stat.TimeStamp)).getTime(), stat.NumPersons]);
+            });
+            this.stats = newstats;
+            break;
+        }
+      },
+
     });
   </script>
 </dom-module>
