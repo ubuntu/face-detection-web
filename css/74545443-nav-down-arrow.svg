@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg id="svg4874" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="90" viewBox="0 0 90 90.000001" width="90" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+ <defs id="defs4876">
+  <clipPath id="clipPath16" clipPathUnits="userSpaceOnUse">
+   <path id="path18" d="m0 595.28h841.89v-595.28h-841.89v595.28z"/>
+  </clipPath>
+ </defs>
+ <metadata id="metadata4879">
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g id="layer1" transform="translate(67.857 -84.505)">
+  <g id="g4845" transform="matrix(0 -1 -1 0 373.51 516.51)">
+   <g id="g1908" transform="matrix(0 -1 -1 0 1394.4 585.36)">
+    <g id="g1910" transform="matrix(-1 0 0 1 576 611)">
+     <g id="g1910-9" transform="matrix(0 -1 1 0 -9.3622 783.36)">
+      <rect id="rect1914" style="color:#000000;enable-background:accumulate" transform="scale(-1,1)" height="90" width="90" y="351.36" x="-432" fill="none"/>
+      <g id="g12" transform="matrix(-.68396 0 0 -.68182 623.69 623.19)">
+       <g id="g14" clip-path="url(#clipPath16)">
+        <g id="g20" transform="translate(358.75 350.71)">
+         <path id="path22" d="m0.082344-0.047079c-3.8695 6.8402-8.2384 13.884-13.107 21.135-4.8661 7.2489-10.086 14.384-15.658 21.4-1.4937 1.8799-2.9884 3.7059-4.4861 5.4859v-20.344c3.0556-4.0217 6.049-8.1844 8.9722-12.505 3.4034-5.0302 6.5973-10.174 9.5887-15.436 2.99-5.261 6.6615-12.688 9.0073-17.715-2.3458-5.0262-6.0169-12.453-9.0073-17.715-2.9914-5.262-6.1853-10.406-9.5887-15.435-2.9232-4.3216-5.9167-8.4842-8.9722-12.506v-20.344c1.4977 1.78 2.9924 3.607 4.4861 5.4859 5.5718 7.0171 10.792 14.151 15.658 21.4 4.8691 7.2519 9.2379 14.295 13.107 21.135 3.8699 6.841 6.9225 12.835 9.149 17.979-2.2265 5.144-5.2791 11.138-9.1487 17.979" fill="#7f8183"/>
+        </g>
+       </g>
+      </g>
+     </g>
+    </g>
+   </g>
+  </g>
+ </g>
+</svg>
