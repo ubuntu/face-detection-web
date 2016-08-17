@@ -151,16 +151,23 @@
         switch(message.type) {
           case 'init':
             var newstats = [];
-            message.allstats.forEach(function(stat) {
-              newstats.push([(new Date(stat.TimeStamp)).getTime(), stat.NumPersons]);
-            });
+            if (message.allstats !== null) {
+              message.allstats.forEach(function(stat) {
+                newstats.push([(new Date(stat.TimeStamp)).getTime(), stat.NumPersons]);
+              });
+            }
             this.stats = newstats;
+            // we need to make an array copy because it won't redraw with the same reference, even after a manual redraw call
+            // this is needed even at first start, in case of server restart and state changed
+            this.$.mainchart.rows = this.stats.slice();
 
             if (message.broken) {
               this.brokenapp = "broken";
             } else {
               this.brokenapp = "";
             }
+            this.screencaptureurl = this._getscreenurl(this.screencaptureurl);
+            this.screendetectedurl = this._getscreenurl(this.screendetectedurl);
             this.facedetection = message.facedetection;
             this.renderingfunmode = message.renderingmode == 1;
 
