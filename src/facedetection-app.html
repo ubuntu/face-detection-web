@@ -59,7 +59,27 @@
       is: 'facedetection-app',
 
       properties: {
+        brokenapp: {
+          type: String,
+          value: "",
+        },
         connected: {
+          type: Boolean,
+          value: false,
+        },
+        screencaptureurl: {
+          type: String,
+          value: "/data/screencapture.png",
+        },
+        screendetectedurl: {
+          type: String,
+          value: "/data/screendetected.png",
+        },
+        facedetection: {
+          type: Boolean,
+          value: false,
+        },
+        renderingfunmode: {
           type: Boolean,
           value: false,
         },
@@ -106,6 +126,38 @@
               newstats.push([(new Date(stat.TimeStamp)).getTime(), stat.NumPersons]);
             });
             this.stats = newstats;
+
+            if (message.broken) {
+              this.brokenapp = "broken";
+            } else {
+              this.brokenapp = "";
+            }
+            this.facedetection = message.facedetection;
+            this.renderingfunmode = message.renderingmode == 1;
+
+            break;
+
+          case 'newstat':
+            var stat = message.newstat;
+            this.push('stats', [(new Date(stat.TimeStamp)).getTime(), stat.NumPersons]);
+            // we need to make an array copy because it won't redraw with the same reference, even after a manual redraw call
+            this.$.mainchart.rows = this.stats.slice();
+
+            if (message.refreshscreenshot) {
+              this.screencaptureurl = "/data/screencapture.png?" + new Date().getTime();
+            }
+            if (message.refreshdetectscreenshot) {
+              this.screendetectedurl = "/data/screendetected.png?" + new Date().getTime();
+            }
+
+            break;
+
+          case 'facedetection':
+            this.facedetection = message.facedetection;
+            break;
+
+          case 'renderingmode':
+            this.renderingfunmode = message.renderingmode == 1;
             break;
         }
       },
