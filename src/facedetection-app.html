@@ -89,11 +89,11 @@
         },
         screencaptureurl: {
           type: String,
-          value: "/data/screencapture.png",
+          value: "/data/screencapture.png?nocache",
         },
         screendetectedurl: {
           type: String,
-          value: "/data/screendetected.png",
+          value: "/data/screendetected.png?nocache",
         },
         facedetection: {
           type: Boolean,
@@ -136,6 +136,15 @@
           console.log('Error in websocket: ' + e.data);
       },
 
+      _getscreenurl: function(screenurl) {
+        var baseurl = screenurl;
+        var index = baseurl.indexOf("?");
+        if (index !== -1) {
+          baseurl = baseurl.slice(0, index);
+        }
+        return baseurl + "?" + new Date().getTime();
+      },
+
       _onmessage: function(e) {
         console.log('Message received: ' + e.data);
         var message = JSON.parse(e.data);
@@ -164,10 +173,10 @@
             this.$.mainchart.rows = this.stats.slice();
 
             if (message.refreshscreenshot) {
-              this.screencaptureurl = "/data/screencapture.png?" + new Date().getTime();
+              this.screencaptureurl = this._getscreenurl(this.screencaptureurl);
             }
             if (message.refreshdetectscreenshot) {
-              this.screendetectedurl = "/data/screendetected.png?" + new Date().getTime();
+              this.screendetectedurl = this._getscreenurl(this.screendetectedurl);
             }
 
             break;
