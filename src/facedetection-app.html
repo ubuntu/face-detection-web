@@ -32,7 +32,12 @@
 
     <div>
       <div class="row row-hero">
-        <h1>Popularity of the booth:</h1>
+        <template is="dom-if" if="{{!brokenapp}}">
+          <h1>Popularity of the demo:</h1>
+        </template>
+        <template is="dom-if" if="{{brokenapp}}">
+          <h1>New awesome shiny V2 version:</h1>
+        </template>
       </div>
       <div class$="row row-enterprise {{brokenapp}}">
         <google-chart
