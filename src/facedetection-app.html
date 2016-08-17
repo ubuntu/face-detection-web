@@ -19,7 +19,10 @@
         display:inline-block;
         width: 49%;
       }
-      .broken {
+      #mainrow {
+        transition: background-color 1500ms linear;
+      }
+      #mainrow.broken {
         background-color: red;
       }
       paper-toast {
@@ -39,7 +42,7 @@
           <h1>New awesome shiny V2 version:</h1>
         </template>
       </div>
-      <div class$="row row-enterprise {{brokenapp}}">
+      <div id="mainrow" class$="row row-enterprise {{brokenapp}}">
         <google-chart
           id="mainchart"
           type='area'
