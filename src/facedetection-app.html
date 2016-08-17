@@ -10,6 +10,10 @@
     <style include="iron-flex iron-flex-alignment">
       :host {
         display: block;
+        /* FIXME: it seems that setting --primary-color in app-theme.html doesn't work here, resetting them */
+        --paper-toggle-button-checked-button-color: var(--ubuntu-orange);
+        --paper-toggle-button-checked-ink-color: var(--ubuntu-orange);
+        --paper-toggle-button-checked-bar-color: var(--ubuntu-orange);
       }
       .screenshot {
         display:inline-block;
@@ -21,7 +25,11 @@
       paper-toast {
         --paper-toast-background-color: var(--canonical-aubergine);
       }
+      paper-toggle-button {
+        margin: 5px;
+      }
     </style>
+
     <div>
       <div class="row row-hero">
         <h1>Popularity of the booth:</h1>
