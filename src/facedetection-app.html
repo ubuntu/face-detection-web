@@ -62,10 +62,10 @@
       </div>
       <div class="row">
         <div class="vertical layout">
-          <paper-toggle-button checked$="[[facedetection]]" disabled$="{{!connected}}">Face detection</paper-toggle-button>
-          <paper-toggle-button checked$="[[renderingfunmode]]" disabled$="{{!connected}}">Fun mode</paper-toggle-button>
+          <paper-toggle-button checked$="{{facedetection}}" disabled$="{{!connected}}" on-change="facedetectiontoggle">Face detection</paper-toggle-button>
+          <paper-toggle-button checked$="{{renderingfunmode}}" disabled$="{{!connected}}" on-change="funmodetoggle">Fun mode</paper-toggle-button>
           <div class="horizontal layout center-justified">
-            <paper-button id="restartButton" raised disabled$="{{!connected}}">Shut down and restart</paper-button>
+            <paper-button id="restartButton" raised disabled$="{{!connected}}" on-tap="quit">Shut down and restart</paper-button>
           </div>
         </div>
       </div>
@@ -120,6 +120,26 @@
         websocket.onmessage = this._onmessage.bind(this);
 
         this.websocket = websocket; // for sending requests
+      },
+
+      facedetectiontoggle: function(e) {
+        var mode = 1;
+        if (!e.target.checked) {
+          mode = 2;
+        }
+        this.websocket.send('{"FaceDetection": ' + mode +'}')
+      },
+
+      funmodetoggle: function(e) {
+        var mode = 1;
+        if (e.target.checked) {
+          mode = 2;
+        }
+        this.websocket.send('{"RenderingMode": ' + mode +'}')
+      },
+
+      quit: function() {
+        this.websocket.send('{"QuitServer": true}');
       },
 
       _connected: function() {
