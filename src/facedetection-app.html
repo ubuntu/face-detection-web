@@ -73,6 +73,16 @@
         <div class="vertical layout">
           <paper-toggle-button checked$="{{facedetection}}" disabled$="{{!connected}}" on-change="facedetectiontoggle">Face detection</paper-toggle-button>
           <paper-toggle-button checked$="{{renderingfunmode}}" disabled$="{{!connected}}" on-change="funmodetoggle">Fun mode</paper-toggle-button>
+          <div>
+            <paper-dropdown-menu label="Active camera" disabled$="{{!connected}}">
+              <paper-listbox class="dropdown-content" attr-for-selected="num" selected="{{activecamera}}"
+                             on-iron-select="_selectedcamerachanged">
+                <template is="dom-repeat" items="[[availablecameras]]">
+                  <paper-item num="[[item]]">Camera [[item]]</paper-item>
+                </template>
+              </paper-listbox>
+            </paper-dropdown-menu>
+          <div>
           <div class="horizontal layout center-justified">
             <paper-button id="restartButton" raised disabled$="{{!connected}}" on-tap="quit">Shut down and restart</paper-button>
           </div>
@@ -113,6 +123,13 @@
           value: false,
         },
         stats: {
+          type: Array,
+          value: function() {
+            return [];
+          },
+        },
+        activecamera: Number,
+        availablecameras: {
           type: Array,
           value: function() {
             return [];
@@ -174,6 +191,11 @@
         return baseurl + "?" + new Date().getTime();
       },
 
+      _selectedcamerachanged: function() {
+        console.log("Selected camera changed");
+        this.websocket.send('{"Camera": ' + this.activecamera +'}');
+      },
+
       _onmessage: function(e) {
         console.log('Message received: ' + e.data);
         var message = JSON.parse(e.data);
@@ -199,6 +221,8 @@
             this.screendetectedurl = this._getscreenurl(this.screendetectedurl);
             this.facedetection = message.facedetection;
             this.renderingfunmode = message.renderingmode == 1;
+            this.activecamera = message.camera;
+            this.availablecameras = message.availablecameras;
 
             break;
 
@@ -223,6 +247,10 @@
 
           case 'renderingmode':
             this.renderingfunmode = message.renderingmode == 1;
+            break;
+
+          case 'newcameraactivated':
+            this.activecamera = message.camera;
             break;
         }
       },
